@@ -1,0 +1,139 @@
+---
+const navItems = [
+    { name: "Inicio", href: "#hero" },
+    { name: "Características", href: "#features" },
+    { name: "Noticias", href: "#news" },
+    { name: "Nosotros", href: "#about" },
+];
+---
+
+<header id="main-header" class="fixed w-full top-0 z-50 transition-all duration-300 bg-utem-blue text-white shadow-lg">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between items-center h-24">
+            
+            <!-- Logo Completo -->
+            <a href="#" class="flex-shrink-0 flex items-center py-2 z-50">
+                <img 
+                    src="/logo-completo.png" 
+                    alt="Universidad Tecnológica Metropolitana" 
+                    class="h-14 md:h-20 w-auto object-contain transition-all" 
+                />
+            </a>
+
+            <!-- Menú Desktop -->
+            <nav class="hidden lg:flex space-x-6">
+                {navItems.map(item => (
+                    <a href={item.href} class="text-xs font-medium hover:text-utem-green transition-colors uppercase tracking-wide flex items-center">
+                        {item.name}
+                    </a>
+                ))}
+                <a href="#contact" class="bg-utem-green hover:bg-green-700 text-white px-4 py-2 rounded-sm text-xs font-bold transition-all uppercase flex items-center shadow-md hover:shadow-lg">
+                    Contacto
+                </a>
+            </nav>
+
+            <!-- Botón Menú Hamburguesa -->
+            <div class="lg:hidden flex items-center z-50">
+                <button id="mobile-menu-btn" class="text-white hover:text-utem-green p-2 focus:outline-none">
+                    <!-- Icono Hamburguesa -->
+                    <svg id="icon-menu" xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                    </svg>
+                    <!-- Icono X (Se muestra cuando está abierto) -->
+                    <svg id="icon-close" xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 hidden transition-transform duration-300 transform rotate-90" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Menú Desplegable Móvil -->
+    <div id="mobile-menu" class="hidden lg:hidden absolute top-24 left-0 w-full bg-utem-blue border-t border-white/10 shadow-xl origin-top animate-fade-in-down">
+        <div class="px-4 pt-4 pb-6 space-y-2 flex flex-col">
+            {navItems.map(item => (
+                <a 
+                    href={item.href} 
+                    class="mobile-link block px-4 py-3 rounded-md text-base font-medium text-white hover:text-utem-green hover:bg-white/5 border-l-4 border-transparent hover:border-utem-green transition-all"
+                >
+                    {item.name}
+                </a>
+            ))}
+            <a 
+                href="#contact" 
+                class="mobile-link block px-4 py-3 mt-4 text-center rounded-md text-base font-bold bg-utem-green text-white hover:bg-green-700 transition-colors uppercase"
+            >
+                Contacto
+            </a>
+        </div>
+    </div>
+</header>
+
+<script>
+    // --- Lógica del Menú Móvil ---
+    const btn = document.getElementById('mobile-menu-btn');
+    const menu = document.getElementById('mobile-menu');
+    const iconMenu = document.getElementById('icon-menu');
+    const iconClose = document.getElementById('icon-close');
+    const mobileLinks = document.querySelectorAll('.mobile-link'); // Seleccionamos los links para cerrar el menú al hacer click
+
+    if (btn && menu && iconMenu && iconClose) {
+        btn.addEventListener('click', () => {
+            // 1. Alternar visibilidad del menú
+            menu.classList.toggle('hidden');
+            
+            // 2. Alternar iconos
+            iconMenu.classList.toggle('hidden');
+            iconClose.classList.toggle('hidden');
+        });
+
+        // 3. Cerrar el menú automáticamente al hacer click en un enlace
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                menu.classList.add('hidden'); // Ocultar menú
+                iconMenu.classList.remove('hidden'); // Mostrar hamburguesa
+                iconClose.classList.add('hidden'); // Ocultar X
+            });
+        });
+    }
+
+    // --- Lógica de Scroll  ---
+    const header = document.getElementById('main-header');
+    if (header) {
+        let lastScroll = 0;
+        window.addEventListener('scroll', () => {
+            const currentScroll = window.pageYOffset;
+            
+            // Si el menú móvil está abierto, NO ocultamos el header al hacer scroll
+            if (!menu?.classList.contains('hidden')) return;
+
+            if (currentScroll <= 0) {
+                header.classList.remove('-translate-y-full');
+                return;
+            }
+            if (currentScroll > lastScroll && !header.classList.contains('-translate-y-full')) {
+                header.classList.add('-translate-y-full');
+            } else if (currentScroll < lastScroll && header.classList.contains('-translate-y-full')) {
+                header.classList.remove('-translate-y-full');
+            }
+            lastScroll = currentScroll;
+        });
+    }
+</script>
+
+<style>
+    /* Pequeña animación para que el menú no aparezca de golpe */
+    @keyframes fadeInDown {
+        from {
+            opacity: 0;
+            transform: translateY(-10px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+    .animate-fade-in-down {
+        animation: fadeInDown 0.3s ease-out forwards;
+    }
+</style>

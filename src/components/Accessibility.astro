@@ -1,0 +1,190 @@
+<div class="fixed bottom-6 right-6 z-50 flex flex-col-reverse items-center gap-3">
+    
+    <!-- Botón Principal TIPO Toggle -->
+    <!-- Mantiene bg-utem-blue siempre. El cambio de íconos se maneja vía CSS con la clase .active -->
+    <button 
+        id="a11y-toggle"
+        class="w-14 h-14 bg-utem-blue text-white rounded-full shadow-2xl flex items-center justify-center transform hover:scale-110 transition-all duration-300 ease-out focus:outline-none border-2 border-white overflow-hidden relative z-50"
+        aria-label="Opciones de Accesibilidad"
+    >
+        <!-- Ícono de Accesibilidad -->
+        <svg id="icon-a11y" xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 absolute inset-0 m-auto transition-all duration-300" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M20.5 6c-2.61.7-5.67 1-8.5 1s-5.89-.3-8.5-1L3 8c1.86.5 4 .83 6 1v13h2v-6h2v6h2V9c2-.17 4.14-.5 6-1l-.5-2zM12 6c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2z"/>
+        </svg>
+
+        <!-- Ícono de Cerrar 'X' -->
+        <!-- Inicia rotado y transparente. El CSS lo endereza cuando el botón tiene la clase .active -->
+        <svg id="icon-close" xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 absolute inset-0 m-auto transition-all duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+    </button>
+
+    <!-- Menú de Opciones -->
+    <div id="a11y-menu" class="flex flex-col gap-3 transition-all duration-300 opacity-0 translate-y-10 pointer-events-none scale-90 origin-bottom mb-2">
+        
+        <!-- Alto Contraste -->
+        <button 
+            id="btn-contrast"
+            class="w-12 h-12 bg-white text-slate-900 rounded-full shadow-lg flex items-center justify-center hover:bg-slate-200 transform hover:scale-110 transition-all duration-200 border border-slate-200"
+            title="Alto Contraste"
+        >
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10zm0-2V4a8 8 0 010 16z" />
+            </svg>
+        </button>
+
+        <!-- Aumentar Texto -->
+        <button 
+            id="btn-increase"
+            class="w-12 h-12 bg-white text-utem-blue rounded-full shadow-lg flex items-center justify-center hover:bg-slate-200 transform hover:scale-110 transition-all duration-200 font-bold text-lg font-serif border border-slate-200"
+            title="Aumentar Texto"
+        >
+            A+
+        </button>
+
+        <!-- Disminuir Texto -->
+        <button 
+            id="btn-decrease"
+            class="w-12 h-12 bg-white text-utem-blue rounded-full shadow-lg flex items-center justify-center hover:bg-slate-200 transform hover:scale-110 transition-all duration-200 font-bold text-sm font-serif border border-slate-200"
+            title="Disminuir Texto"
+        >
+            A-
+        </button>
+
+    </div>
+</div>
+
+<script>
+    const toggleBtn = document.getElementById('a11y-toggle');
+    const menu = document.getElementById('a11y-menu');
+    
+    const btnContrast = document.getElementById('btn-contrast');
+    const btnIncrease = document.getElementById('btn-increase');
+    const btnDecrease = document.getElementById('btn-decrease');
+    const html = document.documentElement;
+
+    let isMenuOpen = false;
+    let currentFontSize = 100;
+
+    toggleBtn?.addEventListener('click', () => {
+        isMenuOpen = !isMenuOpen;
+        
+        if (isMenuOpen) {
+            menu?.classList.remove('opacity-0', 'translate-y-10', 'pointer-events-none', 'scale-90');
+            // Añadimos la clase 'active' al botón para activar las transformaciones CSS de los íconos
+            toggleBtn.classList.add('active');
+        } else {
+            menu?.classList.add('opacity-0', 'translate-y-10', 'pointer-events-none', 'scale-90');
+            // Quitamos la clase 'active'
+            toggleBtn.classList.remove('active');
+        }
+    });
+
+    btnContrast?.addEventListener('click', () => {
+        html.classList.toggle('high-contrast');
+    });
+
+    btnIncrease?.addEventListener('click', () => {
+        if (currentFontSize < 150) {
+            currentFontSize += 10;
+            html.style.fontSize = `${currentFontSize}%`;
+        }
+    });
+
+    btnDecrease?.addEventListener('click', () => {
+        if (currentFontSize > 80) {
+            currentFontSize -= 10;
+            html.style.fontSize = `${currentFontSize}%`;
+        }
+    });
+</script>
+
+<style is:global>
+    /* === ESTILOS DE LOS ICONOS DEL BOTÓN === */
+    /* Estado Normal */
+    #icon-a11y {
+        opacity: 1;
+        transform: rotate(0deg) scale(1);
+    }
+    #icon-close {
+        opacity: 0;
+        transform: rotate(-90deg) scale(0.5);
+    }
+
+    /* Estado Activo (Con clase .active) */
+    /* El botón padre tiene la clase .active, afectamos a los hijos */
+    #a11y-toggle.active #icon-a11y {
+        opacity: 0;
+        transform: rotate(90deg) scale(0.5);
+    }
+    
+    #a11y-toggle.active #icon-close {
+        opacity: 1;
+        transform: rotate(0deg) scale(1);
+    }
+
+    /* === REGLAS DE ALTO CONTRASTE === */
+    html.high-contrast {
+        filter: contrast(120%);
+    }
+    
+    html.high-contrast body, 
+    html.high-contrast main,
+    html.high-contrast section,
+    html.high-contrast footer,
+    html.high-contrast header {
+        background-color: black !important;
+        color: #FFFF00 !important;
+    }
+
+    html.high-contrast div:not(#hero *) {
+        background-color: black !important;
+        border-color: #FFFF00 !important;
+        color: #FFFF00 !important;
+    }
+
+    html.high-contrast img {
+        filter: grayscale(100%) !important;
+    }
+
+    html.high-contrast a,
+    html.high-contrast button,
+    html.high-contrast span,
+    html.high-contrast h1,
+    html.high-contrast h2,
+    html.high-contrast h3,
+    html.high-contrast h4,
+    html.high-contrast h5,
+    html.high-contrast h6,
+    html.high-contrast p,
+    html.high-contrast li {
+        color: #FFFF00 !important;
+    }
+
+    html.high-contrast button,
+    html.high-contrast a.bg-utem-green {
+        border: 2px solid #FFFF00 !important;
+        background-color: black !important;
+    }
+
+    html.high-contrast #hero .absolute {
+        background-color: transparent !important;
+    }
+
+    html.high-contrast #hero .mix-blend-multiply {
+        background-color: rgba(0, 0, 0, 0.7) !important;
+        mix-blend-mode: normal !important;
+    }
+
+    html.high-contrast #hero img {
+        opacity: 1 !important;
+        filter: grayscale(100%) contrast(120%) !important;
+    }
+
+    html.high-contrast #hero h1,
+    html.high-contrast #hero p,
+    html.high-contrast #hero span {
+        color: #FFFF00 !important;
+        text-shadow: 2px 2px 4px #000000 !important;
+    }
+</style>

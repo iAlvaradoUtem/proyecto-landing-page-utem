@@ -1,0 +1,71 @@
+---
+const news = [
+    {
+        title: "Estudiantes UTEM ganan Hackathon Nacional",
+        date: "08 DIC 2025",
+        category: "Logros",
+        image: "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+    },
+    {
+        title: "Nuevo laboratorio de Robótica e IA",
+        date: "01 DIC 2025",
+        category: "Infraestructura",
+        image: "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+    },
+    {
+        title: "Charla Magistral: El futuro del desarrollo móvil",
+        date: "28 NOV 2025",
+        category: "Extensión",
+        image: "https://images.unsplash.com/photo-1544197150-b99a580bb7a8?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+    },
+    {
+        title: "Alianza estratégica con Microsoft Chile",
+        date: "15 NOV 2025",
+        category: "Convenios",
+        image: "https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+    }
+];
+---
+
+<section id="news" class="py-24 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between items-end mb-12 border-b border-utem-gray pb-4">
+            <div>
+                <span class="text-utem-green font-bold uppercase tracking-widest text-sm">Actualidad</span>
+                <h2 class="text-4xl font-serif font-bold text-utem-blue mt-2">Noticias</h2>
+            </div>
+            <a href="#" class="hidden md:inline-block text-utem-blue hover:text-utem-green font-bold uppercase text-sm transition-colors">Ver todas →</a>
+        </div>
+
+        <!-- Waseda Style Grid: Tarjetas limpias con efecto diagonal -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {news.map(item => (
+                <article class="group cursor-pointer">
+                    <div class="relative overflow-hidden mb-4">
+                        <!-- Efecto diagonal con clip-path -->
+                        <div class="aspect-[4/3] w-full overflow-hidden" style="clip-path: polygon(0 0, 100% 0, 100% 85%, 0% 100%);">
+                            <img 
+                                src={item.image} 
+                                alt={item.title} 
+                                class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                            />
+                        </div>
+                        <span class="absolute top-0 left-0 bg-utem-blue text-white text-xs font-bold px-3 py-1 uppercase">
+                            {item.category}
+                        </span>
+                    </div>
+                    <div class="pr-4">
+                        <time class="text-xs text-utem-green font-bold uppercase block mb-1">{item.date}</time>
+                        <h3 class="text-lg font-serif font-bold text-slate-800 leading-snug group-hover:text-utem-blue transition-colors">
+                            {item.title}
+                        </h3>
+                    </div>
+                </article>
+            ))}
+        </div>
+        
+        <div class="mt-8 text-center md:hidden">
+            <a href="#" class="text-utem-blue hover:text-utem-green font-bold uppercase text-sm">Ver todas →</a>
+        </div>
+    </div>
+</section>

@@ -1,0 +1,45 @@
+---
+const features = [
+    {
+        title: "Empleabilidad Top Tier",
+        description: "Asegura tu futuro. Nuestros titulados alcanzan un 93.3% de empleabilidad al segundo año, posicionándose en grandes empresas tecnológicas y startups.",
+        icon: "M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" // Graph up arrow
+    },
+    {
+        title: "Perfil Tecnológico-Gerencial",
+        description: "No solo programarás. Aprenderás a dirigir proyectos, gestionar equipos y liderar estrategias de TI, preparándote para cargos de jefatura y gerencia.",
+        icon: "M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"
+    },
+    {
+        title: "Ingeniería con Propósito",
+        description: "Diferénciate con el Sello UTEM. Desarrolla soluciones tecnológicas que impactan positivamente en la sociedad, la sustentabilidad y el bienestar humano.",
+        icon: "M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" // Mundo/Global
+    }
+];
+---
+
+<section id="features" class="py-24 bg-slate-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16">
+            <span class="text-utem-green font-bold uppercase tracking-widest text-sm">¿Por qué UTEM?</span>
+            <h2 class="text-3xl md:text-4xl font-serif font-bold text-utem-blue mt-2 mb-4">Más que una carrera, tu ventaja competitiva</h2>
+            <div class="w-24 h-1.5 bg-utem-green mx-auto rounded-full"></div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {features.map(feature => (
+                <div class="relative bg-white p-8 rounded-lg shadow-sm hover:shadow-2xl border-t-4 border-utem-green/20 hover:border-utem-green group transform hover:scale-105 transition-all duration-500 ease-out cursor-default">
+                    <div class="absolute -top-6 left-1/2 transform -translate-x-1/2 w-14 h-14 bg-gradient-to-br from-utem-blue to-slate-800 text-white rounded-full flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d={feature.icon} />
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-serif font-bold text-slate-800 mt-8 mb-3 text-center group-hover:text-utem-blue transition-colors">{feature.title}</h3>
+                    <p class="text-slate-600 text-center text-sm leading-relaxed">
+                        {feature.description}
+                    </p>
+                </div>
+            ))}
+        </div>
+    </div>
+</section>
