@@ -4,7 +4,7 @@ Este proyecto consiste en el desarrollo de una Landing Page moderna, responsiva 
 
 El sitio ha sido construido utilizando **Astro** como framework de arquitectura y **Tailwind CSS** para el sistema de diseño, cumpliendo con los estándares de rendimiento y buenas prácticas de desarrollo web moderno.
 
-![Vista Desktop de la Landing Page](desktop.png)
+![Vista Desktop de la Landing Page](docs/desktop.png)
 
 ## 🚀 Tecnologías Utilizadas
 
@@ -26,7 +26,7 @@ El desarrollo cumple con los siguientes puntos evaluados:
 
 El sitio ha sido diseñado pensando primero en la experiencia móvil, asegurando que la navegación y el contenido sean fluidos en pantallas pequeñas.
 
-![Comparativa Mobile](mobile.png)
+![Comparativa Mobile](docs/mobile.png)
 
 *Captura de la pantalla de inicio en versión móvil.*
 
@@ -34,7 +34,7 @@ El sitio ha sido diseñado pensando primero en la experiencia móvil, asegurando
 
 Se ha implementado un widget de accesibilidad flotante que permite a los usuarios ajustar el tamaño del texto y activar un modo de **Alto Contraste** para mejorar la legibilidad.
 
-![Modo Alto Contraste en Móvil](mobile-contraste.png)
+![Modo Alto Contraste en Móvil](docs/mobile-contraste.png)
 
 *Visualización del sitio con el modo de Alto Contraste activado.*
 
@@ -43,12 +43,12 @@ Se ha implementado un widget de accesibilidad flotante que permite a los usuario
 ### Propuesta de Valor y Características
 Sección diseñada para resaltar los pilares fundamentales de la carrera: Empleabilidad, Perfil Tecnológico y Sello Social.
 
-![Sección Características Desktop](desktop-caracteristicas.png)
+![Sección Características Desktop](docs/desktop-caracteristicas.png)
 
 ### Equipo Académico
 Presentación de las autoridades de la escuela con un diseño limpio y profesional, adaptado a dispositivos móviles.
 
-![Sección Académicos Móvil](mobile-academicos.png)
+![Sección Académicos Móvil](docs/mobile-academicos.png)
 
 ## 📂 Estructura del Proyecto
 
